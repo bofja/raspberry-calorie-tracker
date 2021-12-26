@@ -1,3 +1,4 @@
 hx711-multi
 requests
 RPi.GPIO
+numpy
