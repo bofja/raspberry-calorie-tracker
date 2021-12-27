@@ -1,4 +1,6 @@
 hx711-multi
 requests
 RPi.GPIO
+RPLCD
 numpy
+Pillow

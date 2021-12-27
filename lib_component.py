@@ -11,7 +11,7 @@ from hx711_multi import HX711
 from RPLCD.i2c import CharLCD
 
 class Kamera:
-    def __init__(self, server, folder_simpan = "gambar", format_file = "%Y-%m-%d %H:%M:%S"):
+    def __init__(self, server, folder_simpan = "capture", format_file = "%Y-%m-%d %H:%M:%S"):
         # Alamat web server kamera
         self.server = server
         # Direktori untuk menyimpan gambar
@@ -109,7 +109,7 @@ class LoadCell:
         # Minta pengguna memasukkan berat beban sesungguhnya
         berat_asli = float(input("Masukkan berat sesungguhnya (gram): "))
         # Lakukan kalibrasi nilai berat untuk pengukuran selanjutnya
-        rasio = round(berat_mentah / berat_asli, 2)
+        rasio = round(berat_mentah / berat_asli, 3)
         self.hx711.set_weight_multiples(rasio)
         print(f"Rasio kalibrasi: {rasio}")
 
@@ -117,7 +117,7 @@ class LoadCell:
         # Ukur berat mentah dari beban saat ini sampai terbaca
         self.__timbang_mentah()
         # Berikan hasil pengukuran berat terakhir (berat mentah dibagi rasio)
-        return round(self.hx711.get_weight(), 2)
+        return round(self.hx711.get_weight(), 3)
 
 class LCD:
     # Jenis yang digunakan umumnya PCF8574 (lihat pada bagian chip I2C)
