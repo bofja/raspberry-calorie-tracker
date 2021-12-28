@@ -1,0 +1,162 @@
+{
+   "foods":{
+      "food":[
+         {
+            "food_description":"Per 100g - Calories: 89kcal | Fat: 0.33g | Carbs: 22.84g | Protein: 1.09g",
+            "food_id":"35755",
+            "food_name":"Bananas",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/usda/bananas"
+         },
+         {
+            "food_description":"Per 100g - Calories: 89kcal | Fat: 0.33g | Carbs: 22.84g | Protein: 1.09g",
+            "food_id":"5388",
+            "food_name":"Banana",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/generic/banana-raw"
+         },
+         {
+            "brand_name":"Dole",
+            "food_description":"Per 1 medium - Calories: 110kcal | Fat: 0.30g | Carbs: 29.00g | Protein: 1.00g",
+            "food_id":"624623",
+            "food_name":"Bananas",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/dole/bananas"
+         },
+         {
+            "brand_name":"Chiquita",
+            "food_description":"Per 1 medium banana - Calories: 110kcal | Fat: 0.00g | Carbs: 30.00g | Protein: 1.00g",
+            "food_id":"3864996",
+            "food_name":"Banana",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/chiquita/banana"
+         },
+         {
+            "brand_name":"Giant Food",
+            "food_description":"Per 1 banana - Calories: 121kcal | Fat: 0.00g | Carbs: 31.00g | Protein: 1.00g",
+            "food_id":"69416",
+            "food_name":"Bananas (Large)",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/giant-food/bananas-(large)"
+         },
+         {
+            "brand_name":"Chiquita",
+            "food_description":"Per 1 mini banana - Calories: 55kcal | Fat: 0.00g | Carbs: 14.50g | Protein: 0.50g",
+            "food_id":"886932",
+            "food_name":"Mini Banana",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/chiquita/mini-banana"
+         },
+         {
+            "brand_name":"Dole",
+            "food_description":"Per 1 baby banana - Calories: 72kcal | Fat: 0.00g | Carbs: 19.00g | Protein: 1.00g",
+            "food_id":"8871158",
+            "food_name":"Baby Banana",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/dole/baby-banana"
+         },
+         {
+            "brand_name":"Del Monte",
+            "food_description":"Per 1 medium - Calories: 110kcal | Fat: 0.00g | Carbs: 29.00g | Protein: 1.00g",
+            "food_id":"1823250",
+            "food_name":"Banana",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/del-monte/banana"
+         },
+         {
+            "brand_name":"Dole",
+            "food_description":"Per 1 medium - Calories: 110kcal | Fat: 0.00g | Carbs: 29.00g | Protein: 1.00g",
+            "food_id":"547041",
+            "food_name":"Organic Bananas",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/dole/organic-bananas"
+         },
+         {
+            "brand_name":"Great Value",
+            "food_description":"Per 1 cup - Calories: 200kcal | Fat: 0.00g | Carbs: 45.00g | Protein: 3.00g",
+            "food_id":"12884555",
+            "food_name":"Sliced Bananas (Frozen)",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/great-value/sliced-bananas-(frozen)"
+         },
+         {
+            "brand_name":"Del Monte",
+            "food_description":"Per 2 mini bananas - Calories: 90kcal | Fat: 0.00g | Carbs: 24.00g | Protein: 1.00g",
+            "food_id":"983492",
+            "food_name":"Mini Bananas",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/del-monte/mini-bananas"
+         },
+         {
+            "food_description":"Per 131g - Calories: 166kcal | Fat: 0.48g | Carbs: 42.62g | Protein: 1.59g",
+            "food_id":"5394",
+            "food_name":"Baked Banana",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/generic/banana-baked"
+         },
+         {
+            "food_description":"Per 100g - Calories: 89kcal | Fat: 0.33g | Carbs: 22.84g | Protein: 1.09g",
+            "food_id":"5396",
+            "food_name":"Boiled Ripe Banana",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/generic/banana-ripe-boiled"
+         },
+         {
+            "brand_name":"Dairy Queen",
+            "food_description":"Per 1 slice - Calories: 25kcal | Fat: 0.00g | Carbs: 6.00g | Protein: 0.00g",
+            "food_id":"168501",
+            "food_name":"Banana Slices",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/dairy-queen/banana-slices"
+         },
+         {
+            "food_description":"Per 100g - Calories: 27kcal | Fat: 0.45g | Carbs: 5.35g | Protein: 1.66g",
+            "food_id":"6265",
+            "food_name":"Banana Pepper",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/generic/pepper-banana-raw"
+         },
+         {
+            "food_description":"Per 100g - Calories: 89kcal | Fat: 0.33g | Carbs: 22.84g | Protein: 1.09g",
+            "food_id":"5391",
+            "food_name":"Chinese Banana",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/generic/banana-chinese-raw"
+         },
+         {
+            "brand_name":"Frieda's",
+            "food_description":"Per 1 banana - Calories: 80kcal | Fat: 0.00g | Carbs: 20.00g | Protein: 1.00g",
+            "food_id":"58432",
+            "food_name":"Burro Banana",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/friedas/burro-banana"
+         },
+         {
+            "brand_name":"Whole Foods Market",
+            "food_description":"Per 17 pieces - Calories: 60kcal | Fat: 4.00g | Carbs: 6.00g | Protein: 0.00g",
+            "food_id":"3719403",
+            "food_name":"Banana Chips",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/whole-foods-market/banana-chips"
+         },
+         {
+            "food_description":"Per 100g - Calories: 89kcal | Fat: 0.33g | Carbs: 22.84g | Protein: 1.09g",
+            "food_id":"5389",
+            "food_name":"Ripe White Banana (Guineo Blanco Maduro)",
+            "food_type":"Generic",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/generic/banana-white-ripe-(guineo-blanco-maduro)"
+         },
+         {
+            "brand_name":"Taco Cabana",
+            "food_description":"Per 1 serving - Calories: 260kcal | Fat: 0.00g | Carbs: 64.00g | Protein: 0.00g",
+            "food_id":"1079139",
+            "food_name":"Banana Slushie",
+            "food_type":"Brand",
+            "food_url":"https://www.fatsecret.com/calories-nutrition/taco-cabana/banana-slushie"
+         }
+      ],
+      "max_results":"20",
+      "page_number":"0",
+      "total_results":"1000"
+   }
+}

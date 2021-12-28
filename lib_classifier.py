@@ -2,7 +2,7 @@
 # Masukan berupa gambar makanan, model tensor, dan label tensor
 
 import numpy
-import PIL as pillow
+from PIL import Image
 import tflite_runtime.interpreter as tflite
 
 class Classifier:
@@ -27,7 +27,7 @@ class Classifier:
                     label = [ baris.strip() for baris in file.readlines() ]
             except Exception:
                 # Beri tahu pengguna bila label tidak dapat terdefinisi
-                print("Label bukanlah list ataupun file...")
+                print("Label model bukanlah list ataupun file...")
                 return None
         # Hilangkan duplikat pada label bila ada
         return list(dict.fromkeys(label))
@@ -40,13 +40,13 @@ class Classifier:
         # Simpan dimensi dan atur ukuran gambar
         lebar = tensor_masuk[0]["shape"][1]
         tinggi = tensor_masuk[0]["shape"][2]
-        gambar = pillow.open(gambar).resize(lebar, tinggi)
+        gambar = Image.open(gambar).resize((lebar, tinggi))
 
         # Perlebar bentuk array sesuai gambar
         data_masuk = numpy.expand_dims(gambar, axis = 0)
-        if tensor_masuk[0]["dtype"] == numpy.float:
+        if tensor_masuk[0]["dtype"] == numpy.float32:
             # Normalisasi nilai data masuk
-            data_masuk = (numpy.float(data_masuk) - self.mean) / self.std
+            data_masuk = (numpy.float32(data_masuk) - self.mean) / self.std
 
         # Prediksi kelas dari gambar saat ini
         self.interpreter.set_tensor(tensor_masuk[0]["index"], data_masuk)
@@ -54,7 +54,6 @@ class Classifier:
         data_keluar = self.interpreter.get_tensor(tensor_keluar[0]["index"])
 
         # Kembalikan prediksi kelas yang nilainya tertinggi
-        # TODO: Cek hasil akurasi dari numpy squeeze
+        # TODO: Cegah hasil bila akurasi yang diberikan buruk
         hasil_maks = numpy.squeeze(data_keluar).argmax()
-        indeks = self.label[hasil_maks].index(" ")
-        return self.label[hasil_maks][indeks+1:]
+        return self.label[hasil_maks]

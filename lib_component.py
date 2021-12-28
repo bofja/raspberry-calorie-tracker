@@ -23,14 +23,16 @@ class Kamera:
         # Berikan waktu saat ini sesuai format nama file gambar
         return time.strftime(self.format_file)
     
-    def potret(self):
+    def potret(self, jeda = 0):
+        # Tunggu X detik sebelum potret
+        if jeda > 0: time.sleep(jeda)
         # Tangkap gambar dari web server kamera
         gambar = requests.get(f"{self.server}/capture")
         if gambar.status_code == 200:
             # Simpan gambar ke folder destinasi sesuai format nama
             destinasi = f"{self.folder_simpan}/{self.__waktu()}.jpg"
             with open(destinasi, "wb") as file:
-                try: file.write(gambar)
+                try: file.write(gambar.content)
                 except Exception:
                     # Beri tahu pengguna bila gagal menyimpan gambar
                     print("Destinasi gambar tidak bisa diakses atau ditulis...")
@@ -129,11 +131,18 @@ class LCD:
         self.lcd.close(True)
 
     def tulis(self, teks, baris = 1):
-        # Hapus teks sebelumnya dari layar
-        self.lcd.clear()
         # Tulis teks pada baris yang sesuai
         self.lcd.cursor_pos = (baris - 1, 0)
         self.lcd.write_string(teks)
+    
+    def tulis_nyala(self, teks, baris = 1, jeda = 5, hapus = True):
+        # Tulis teks pada baris yang sesuai
+        self.lcd.cursor_pos = (baris - 1, 0)
+        self.lcd.write_string(teks)
+        # Nyalakan backlight layar selama X detik
+        self.nyala(jeda)
+        # Hapus kembali layar bila diminta
+        if hapus: self.lcd.clear()
 
     def nyala(self, jeda = 0):
         # Nyalakan backlight layar
@@ -143,6 +152,7 @@ class LCD:
             time.sleep(jeda)
             self.lcd.backlight_enabled = False
 
-    def mati(self):
+    def mati(self, hapus = False):
         # Matikan backlight layar
         self.lcd.backlight_enabled = False
+        if hapus: self.lcd.clear()
