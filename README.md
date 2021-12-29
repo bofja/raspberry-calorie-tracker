@@ -4,8 +4,18 @@ Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. T
 |||
 |-|-|
 |119140218|Andhika Wibawa|
-|119140XXX|Muhammad Yahya|
-||Ishak Fikri Taufiq|
+|119140134|Muhammad Yahya|
+|14117174|Ishak Fikri Taufiq|
+
+## Design and schematic
+
+### System Schematic
+<img src="docs/System Schematic.png" height="300">
+
+**Note:** The NodeRED part is still partially done
+
+### Prototype Design
+<img src="docs/Prototype Design.png" height="300">
 
 ## Hardwares used
 1. 📶 Modem/router (for internet connection)
@@ -55,7 +65,15 @@ See more detail on instructions...
 4. ???
 5. Profit
 
+## References
+* [Automatic Calorie Tracking Scale](https://www.hackster.io/lezwon/automatic-calorie-tracking-scale-31d780) (primary)
+* [ESP32-CAM Streaming Web Server](https://randomnerdtutorials.com/esp32-cam-video-streaming-face-recognition-arduino-ide)
+* [RPLCD (LCD Library) Documentation](https://rplcd.readthedocs.io/en/stable/)
+* [Python "hx711-multi" Library Documentation](https://github.com/Morrious/hx711-multi)
+* [Python "requests" Library Documentation](https://docs.python-requests.org/en/latest/)
+* [Official FatSecret REST API Guide](https://platform.fatsecret.com/api/Default.aspx?screen=rapiauth2)
+* [TensorFlow Lite Image Classification Examples](https://github.com/tensorflow/examples/tree/master/lite/examples/image_classification)
+
 ## Todo
-* Add references
-* Add prototype design and schematic
-* Push daily calorie statistics to NodeRED
+* Push daily calorie statistics to NodeRED (from CSV file)
+* Prevent food stats logging when the image classification accuracy is bad
