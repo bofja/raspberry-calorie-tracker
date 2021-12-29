@@ -17,6 +17,9 @@ Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. T
 ### Prototype Design
 <img src="docs/Prototype Design.png" height="300">
 
+### Demo Video
+[<img src="docs/Video Thumbnail.png" height="300">](https://youtu.be/2P6GtZ_DnxM)
+
 ## Hardwares used
 1. 📶 Modem/router (for internet connection)
 2. 🖥️ Raspberry Pi 3B (use at least 16 GB MicroSD to be safe)
@@ -30,7 +33,7 @@ Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. T
 2. Visual Studio Code (or any text editor)
 3. TensorFlow Lite (ARM32 version)
 4. Arduino IDE (for ESP32-CAM)
-5. Python (version > 2)
+5. Python (tested on v3.9.9)
 
 See more detail on instructions...
 

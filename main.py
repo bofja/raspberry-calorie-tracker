@@ -45,7 +45,7 @@ def loop():
             buzzer.bunyi()
             # Tampilkan info makanan ke LCD selama X detik
             lcd.tulis_nyala(info_makanan, 1, 5)
-            # Tulis hasil info makanan saat ini ke file statistik Node-RED
+            # Tulis hasil info makanan saat ini ke file statistik NodeRED
             #stats.tambah_csv(jenis_makanan, berat_sekarang, kalori * berat_sekarang)
         elif berat_minimum < berat_sebelum:
             print(f"Berat timbangan (isi belum berubah): {berat_sekarang}")

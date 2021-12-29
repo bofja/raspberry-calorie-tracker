@@ -1,11 +1,11 @@
-# Digunakan saat mengirim dan menerima data ke FatSecret dan Node-RED
+# Digunakan saat mengirim dan menerima data ke FatSecret dan NodeRED
 # Masukan untuk FatSecret berupa jenis makanan yang diklasifikasi TFLite
-# TODO: Masukan untuk Node-RED berupa informasi gizi makanan dari FatSecret
+# TODO: Masukan untuk NodeRED berupa informasi gizi makanan dari FatSecret
 
 # FatSecret
 import requests
 import requests.auth as rauth
-# Node-RED
+# NodeRED
 import time
 import csv
 
@@ -101,12 +101,12 @@ class FatSecret:
             for takaran in info_makanan["servings"]["serving"]:
                 if takaran["metric_serving_unit"] == "g":
                     # Dapatkan estimasi kalori per gram jika satuan berupa gram
-                    kalori.append(float(takaran["calories"]) / takaran["metric_serving_amount"])
+                    kalori.append(float(takaran["calories"]) / float(takaran["metric_serving_amount"]))
             # Rata-ratakan kalori dari tiap-tiap takaran
             kalori = round(sum(kalori) / len(kalori), 3)
             return int(kalori) if kalori.is_integer() else kalori
 
-# TODO: Baca statistik untuk Node-RED
+# TODO: Baca statistik untuk NodeRED
 class CsvHelper:
     def __init__(self, file_csv):
         # File CSV untuk operasi baca tulis
