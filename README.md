@@ -1,5 +1,5 @@
 # Automatic Food Calorie Tracker
-Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. This was originally made for my "Embedded System" final project, feel free to use and modify.
+Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. This was originally made for my "Embedded System" final project, feel free to use and modify. Our project report can be seen on Google Docs [here](https://docs.google.com/document/d/1jz4DmqK8kmIxa3OSr7nDh6nGGx4Qsud4/).
 
 |||
 |-|-|
