@@ -1,5 +1,5 @@
 # Automatic Food Calorie Tracker
-Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. This was originally made for my "Embedded System" final project, feel free to use and modify. Our project report can be seen on Google Docs [here](https://docs.google.com/document/d/1jz4DmqK8kmIxa3OSr7nDh6nGGx4Qsud4/).
+Automatic food calorie tracker using Raspberry Pi, sensors, and FatSecret API. This was originally made for my "Embedded System" final project, feel free to use and modify.
 
 |||
 |-|-|
@@ -44,7 +44,7 @@ See more detail on instructions...
 2. Install ESP32 (ESP32-CAM) add-on on Arduino IDE
 3. Plug (to PC/RPi), flash, and run ESP32-CAM C++ code using Arduino IDE
 4. Save ESP32-CAM camera server IP address by any means
-5. Unplug ESP32-CAM (if plugged to PC) and plug it to Raspberry Pi (see prototype design)
+5. Unplug ESP32-CAM (if plugged to PC) and plug it to Raspberry Pi - Power and Ground only 
 5. Capture food images (the more the better) of at least 2 food types (use different angles/rotations, etc.)
 6. Save the images for later (machine learning training purpose)
 
