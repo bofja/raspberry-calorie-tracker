@@ -1,59 +1,59 @@
-# Digunakan saat mengklasifikasi jenis makanan
-# Masukan berupa gambar makanan, model tensor, dan label tensor
+# Used when classifying food types
+# Input is food images, tensor models, and tensor labels
 
 import numpy
 from PIL import Image
 import tflite_runtime.interpreter as tflite
 
 class Classifier:
-    def __init__(self, model, label, mean = 127.5, std = 127.5):
-        # Rata-rata dan standar deviasi untuk normalisasi
-        self.mean = mean
-        self.std = std
-        # Muat label dari list atau file
-        self.label = self.__muat_label(label)
-        # Inisialisasi model interpreter
-        self.interpreter = tflite.Interpreter(model)
-        self.interpreter.allocate_tensors()
+   def __init__(self, model, label, mean = 127.5, std = 127.5):
+      # Mean and standard deviation for normalization
+      self.mean = mean
+      self.std = std
+      # Load labels from a list or file
+      self.label = self.__muat_label(label)
+      # Initialize the interpreter model
+      self.interpreter = tflite.Interpreter(model)
+      self.interpreter.allocate_tensors()
 
-    def __muat_label(self, label):
-        # Cek apakah tipe label adalah sejenis array
-        if isinstance(label, (list, tuple, set)): pass
-        else:
-            try:
-                # Coba baca label sebagai file
-                with open(label, "r") as file:
-                    # Simpan baris-baris nama pada file label menjadi list
-                    label = [ baris.strip() for baris in file.readlines() ]
-            except Exception:
-                # Beri tahu pengguna bila label tidak dapat terdefinisi
-                print("Label model bukanlah list ataupun file...")
-                return None
-        # Hilangkan duplikat pada label bila ada
-        return list(dict.fromkeys(label))
+   def __muat_label(self, label):
+      # Check if the label type is an array
+      if isinstance(label, (list, tuple, set)): pass
+      else:
+         try:
+            # Try reading the labels as a file
+            with open(label, "r") as file:
+               # Save the lines of the label file names as a list
+               label = [ lines.strip() for lines in file.readlines() ]
+         except Exception:
+            # Notify the user if the label cannot be defined
+            print("Model label is neither a list nor a file...")
+            return None
+      # Remove duplicates in labels if any
+      return list(dict.fromkeys(label))
 
-    def klasifikasi(self, gambar):
-        # Simpan detail model masuk dan keluar
-        tensor_masuk = self.interpreter.get_input_details()
-        tensor_keluar = self.interpreter.get_output_details()
+   def classification(self, image):
+      # Save the model details in and out
+      tensor_entry = self.interpreter.get_input_details()
+      tensor_out = self.interpreter.get_output_details()
 
-        # Simpan dimensi dan atur ukuran gambar
-        lebar = tensor_masuk[0]["shape"][1]
-        tinggi = tensor_masuk[0]["shape"][2]
-        gambar = Image.open(gambar).resize((lebar, tinggi))
+      # Save the dimensions and resize the image
+      width = tensor_entry[0]["shape"][1]
+      height = tensor_entry[0]["shape"][2]
+      image = Image.open(image).resize((width, height))
 
-        # Perlebar bentuk array sesuai gambar
-        data_masuk = numpy.expand_dims(gambar, axis = 0)
-        if tensor_masuk[0]["dtype"] == numpy.float32:
-            # Normalisasi nilai data masuk
-            data_masuk = (numpy.float32(data_masuk) - self.mean) / self.std
+      # Widen the shape of the array to fit the image
+      data_entry = numpy.expand_dims(image, axis = 0)
+      if tensor_entry[0]["dtype"] == numpy.float32:
+         # Normalize the input values
+         input_data = (numpy.float32(input_data) - self.mean) / self.std
 
-        # Prediksi kelas dari gambar saat ini
-        self.interpreter.set_tensor(tensor_masuk[0]["index"], data_masuk)
-        self.interpreter.invoke()
-        data_keluar = self.interpreter.get_tensor(tensor_keluar[0]["index"])
+      # Predict the class of the current image
+      self.interpreter.set_tensor(tensor_entry[0]["index"], input_data)
+      self.interpreter.invoke()
+      output_data = self.interpreter.get_tensor(tensor_entry[0]["index"])
 
-        # Kembalikan prediksi kelas yang nilainya tertinggi
-        # TODO: Cegah hasil bila akurasi yang diberikan buruk
-        hasil_maks = numpy.squeeze(data_keluar).argmax()
-        return self.label[hasil_maks]
+      # Return the highest predicted class
+      # TODO: Prevent output when the accuracy is poor
+      output_max = numpy.squeeze(output_data).argmax()
+      return self.label[output_max]
