@@ -2,65 +2,65 @@ import lib_component as comp
 import lib_classifier as model
 import lib_api as api
 
-# User dan password autentikasi FatSecret
+# FatSecret authentication username and password
 fs_client_id = "REMOVED"
 fs_client_secret = "REMOVED"
 
 def setup():
-    # Set sebagai variabel global agar dapat diakses dari luar
-    global kamera, load_cell, buzzer, lcd, tflite, fatsecret, stats
-    # Inisialisasi sensor dan aktuator
-    kamera = comp.Kamera(server = "http://172.16.0.11", folder_simpan = "capture")
-    load_cell = comp.LoadCell(dout_pin = 5, sck_pin = 6, rasio = 221.33)
-    lcd = comp.LCD(kolom = 16, baris = 2, alamat = 0x27)
-    buzzer = comp.Buzzer(pin = 19)
-    # Inisialisasi model klasifikasi dari file
-    tflite = model.Classifier("config/model_unquant.tflite", "config/food_label.txt")
-    # Inisialisasi FatSecret API dan simpan akses token ke dalam file
-    fatsecret = api.FatSecret(fs_client_id, fs_client_secret, "config/fatsecret_token.txt")
-    # File statistik makanan untuk dibaca NodeRED
-    #stats = api.CsvHelper("config/food_stats.csv")
+   # Set as global variables to be accessible from outside
+   global kamera, load_cell, buzzer, lcd, tflite, fatsecret, stats
+   # Initialize sensors and actuators
+   kamera = comp.Kamera(server = "http://172.16.0.11", folder_simpan = "capture")
+   load_cell = comp.LoadCell(dout_pin = 5, sck_pin = 6, ratio = 221.33)
+   lcd = comp.LCD(column = 16, row = 2, address = 0x27)
+   buzzer = comp.Buzzer(pin = 19)
+   # Initialize model classification from file
+   tflite = model.Classifier("config/model_unquant.tflite", "config/food_label.txt")
+   # Initialize FatSecret API and save access token to file
+   fatsecret = api.FatSecret(fs_client_id, fs_client_secret, "config/fatsecret_token.txt")
+   # Food statistics file to read from NodeRED
+   #stats = api.CsvHelper("config/food_stats.csv")
 
 def loop():
-    # Berat minimum dimana timbangan dianggap berisi (gram)
-    berat_minimum = 2
-    # Berat hasil pengukuran sebelumnya
-    berat_sebelum = 0
+   # Minimum weight at which scale is considered loaded (grams)
+   minimum_weight = 2
+   # Previous weight
+   previous_weight = 0
 
-    while True:
-        berat_sekarang = load_cell.timbang()
-        # Bila timbangan berisi maka...
-        if berat_sebelum < berat_minimum <= berat_sekarang:
-            print(f"Berat timbangan (telah diisi): {berat_sekarang}")
-            # Tunggu X detik lalu potret dan klasifikasi makanan
-            file_gambar = kamera.potret(3)
-            jenis_makanan = tflite.klasifikasi(file_gambar)
-            # Dapatkan estimasi kalori per gram dari id makanan paling relevan
-            kalori = fatsecret.estimasi_kalori(fatsecret.cari_makanan(jenis_makanan, 20, True))
-            # Simpan jenis makanan dan estimasi kalori total
-            info_makanan = f"{jenis_makanan}\nKalori: {round(kalori * berat_sekarang)}"
-            # Tampilkan info dan berat makanan ke terminal
-            print(info_makanan + f"\nBerat: {berat_sekarang}")
-            # Nyalakan buzzer sebagai indikasi berhasil
-            buzzer.bunyi()
-            # Tampilkan info makanan ke LCD selama X detik
-            lcd.tulis_nyala(info_makanan, 1, 5)
-            # Tulis hasil info makanan saat ini ke file statistik NodeRED
-            #stats.tambah_csv(jenis_makanan, berat_sekarang, kalori * berat_sekarang)
-        elif berat_minimum < berat_sebelum:
-            print(f"Berat timbangan (isi belum berubah): {berat_sekarang}")
-        else:
-            print(f"Berat timbangan (kosong): {berat_sekarang}")
-        # Simpan berat saat ini untuk perulangan selanjutnya
-        berat_sebelum = berat_sekarang
+   while True:
+      current_weight = load_cell.weigh()
+      # If scale is loaded then...
+      if previous_weight < minimum_weight <= current_weight:
+         print(f"Weight of scale (filled): {current_weight}")
+         # Wait X seconds then take picture and classify food
+         image_file = camera.portrait(3)
+         food_type = tflite.classification(image_file)
+         # Get estimated calories per gram from the most relevant food id
+         calories = fatsecret.estimation_calories(fatsecret.search_food(food_type, 20, True))
+         # Save food type and estimated total calories
+         food_info = f"{food_type}\nCalories: {round(calories * current_weight)}"
+         # Display food info and weight to terminal
+         print(food_info + f"\nWeight: {current_weight}")
+         # Turn on buzzer to indicate success
+         buzzer.sound()
+         # Display food info to LCD for X seconds
+         lcd.write_on(food_info, 1, 5)
+         # Write current food info results to NodeRED statistics file
+         #stats.add_csv(food_type, current_weight, calories * current_weight)
+      elif minimum_weight < previous_weight:
+         print(f"Weight of the scale (contents have not changed): {current_weight}")
+      else:
+         print(f"Weight of the scale (empty): {current_weight}")
+      # Save the current weight for the next loop
+      previous_weight = current_weight
 
 if __name__ == "__main__":
-    # while True:
-    #     # Untuk keperluan training awal jenis makanan
-    #     kamera = comp.Kamera(server = "http://172.16.0.11", folder_simpan = "training")
-    #     tanya = input("Tekan ENTER untuk memotret foto...")
-    #     kamera.potret()
+   # while True:
+   # # For initial training purposes of food types
+   # camera = comp.Camera(server = "http://172.16.0.11", save_folder = "training")
+   # ask = input("Press ENTER to take a photo...")
+   # camera.portret()
 
-    # Program utama
-    setup()
-    loop()
+   # Main program
+   setup()
+   loop()
