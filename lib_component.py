@@ -31,12 +31,12 @@ class Camera:
      if image.status_code == 200:
         # Save the image to the destination folder in the name format
         destination = f"{self.save_folder}/{self.__time()}.jpg"
-            with open(destination, "wb") as file:
-        try: file.write(image.content)
-        except Exception:
-           # Notify the user if the image save fails
-           print("Image destination cannot be accessed or written to...")
-        return None
+        with open(destination, "wb") as file:
+           try: file.write(image.content)
+           except Exception:
+              # Notify the user if the image save fails
+              print("Image destination cannot be accessed or written to...")
+              return None
         # Return the path to the saved image file
         return destination
      else:
@@ -57,15 +57,15 @@ class Buzzer:
       try: GPIO.cleanup()
       except Exception: pass
 
-   def suara(self, ulang = 1, jeda_nyalai = 0.5, jeda_mati = 0.3):
+   def sound(self, ulang = 1, jeda_nyalai = 0.5, jeda_mati = 0.3):
       # Turn on buzzer repeatedly (if needed)
       for _ in range(ulang):
       # Turn on buzzer according to on interval
       GPIO.output(self.pin, GPIO.HIGH)
-      time.sleep(jeda_nyalai)
+      time.sleep(pause_on)
       # Turn off buzzer according to off interval
       GPIO.output(self.pin, GPIO.LOW)
-      time.sleep(jeda_mati)
+      time.sleep(pause_off)
 
 class LoadCell:
    def __init__(self, dout_pin, sck_pin, ratio = 0):
@@ -92,12 +92,12 @@ class LoadCell:
       try: GPIO.cleanup()
       except Exception: pass
 
-   def __timbang_mentah(self, hitung = 30):
+   def __raw_weigh(self, hitung = 30):
       # Calculate the performance (time) of the weight measurement
-      mulai = time.perf_counter()
+      start = time.perf_counter()
       # Measure the raw weight of the current load until it is read
-      while self.hx711.read_raw(hitung) == None:
-         duration = int(round(time.perf_counter() - mulai))
+      while self.hx711.read_raw(count) == None:
+         duration = int(round(time.perf_counter() - start))
          print(f"Weight not read ({duration} seconds), retrying...")
 
    def calibration(self):
@@ -140,11 +140,11 @@ class LCD:
       self.lcd.cursor_pos = (row - 1, 0)
       self.lcd.write_string(text)
       # Turn on the screen backlight for X seconds
-      self.nyala(pause)
+      self.on(pause)
       # Clear the screen again when requested
       if clear: self.lcd.clear()
 
-   def nyala(self, paus = 0):
+   def on(self, paus = 0):
       # Turn on the screen backlight
       self.lcd.backlight_enabled = True
       # Turn it off again after a certain delay (seconds)
@@ -152,7 +152,7 @@ class LCD:
          time.sleep(pause)
          self.lcd.backlight_enabled = False
 
-   def mati(self, lupa = False):
+   def die(self, forget = False):
       # Turn off the screen backlight
       self.lcd.backlight_enabled = False
-      if lupa: self.lcd.clear()
+      if forget: self.lcd.clear()
